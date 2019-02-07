@@ -1,0 +1,76 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <unistd.h> //used to include sleep()
+using namespace std;
+
+int main() 
+{
+//welcome the player
+	string choice;
+	cout<<"Hi, welcome to the AdVeNtUrE: \n";
+	//extra:
+	sleep(2); 
+	cout<<"Would you like to see the attack and block statistics? \n";
+	cin>>choice;
+//set up the game
+    int health = 10, attack, block, count=0, turns;
+//seed the random number generator
+	srand(time(0));
+	turns = rand() % 4 + 1;
+//start the loop
+//add 1 to the iterator
+//start the encounter
+	sleep(2);
+	cout<<"You will now have to battle the Demon King\n";
+	sleep(2);
+	cout<<"The Demon King will attack you and you have to try to block his attacks. If you manage to survive this ordeal, you shall be named 'Survivor of the Demon King'\n";
+	sleep(2);
+    //randomly generate numbers for attack (range = 0-4) and block //(range = 0-4)
+    //if block is greater or equal to attack, successful block
+    //otherwise, subtract attack value from health.
+//keep looping while health is greater than zero and fewer than 4 turns //have happened	
+	do
+	{
+		attack = rand() % 4 + 1;
+		block = rand() % 4 + 1;
+		if(block>=attack)
+		{
+			if(choice == "yes")
+			{
+				cout<<"Attack: "<<attack<<"\n";
+				cout<<"Block: "<<block<<"\n";
+			}
+			cout<<"Successful block\n";
+			cout<<"Your health is now: "<<health<<"\n";
+			sleep(2);	
+		}
+		else if(block<attack)
+		{
+			if(choice == "yes")
+			{
+				cout<<"Attack: "<<attack<<"\n";
+				cout<<"Block: "<<block<<"\n";
+			}
+			cout<<"Block unsuccessful\n";
+			cout<<"Your health is now: "<<health-attack<<"\n";
+			health = health-attack;
+			if(health<3 && health>0)
+			{
+				cout<<"Go see the doctor\n";
+				//break;
+			}
+			sleep(2);
+		}
+		count++;
+	}while(count<turns || health>0);
+//if health is greater than 0, congratulate player
+	if(health>0)
+	{
+		sleep(2);
+		cout<<"Congratulations! You have managed to survive this adventure! I hereby bestoy upon you, the title of 'Survivor of the Demon King'!\n";
+	}
+//otherwise, tell the player they're dead.
+	else
+	cout<<"You have died. Better luck in your next lifetime.\n";
+}
