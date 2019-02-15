@@ -1,0 +1,153 @@
+#include <iostream>
+#include <string>
+#include <unistd.h>
+using namespace std;
+
+int main()
+{
+	string pItems[10], pChoice, itemName1, itemName2, itemName3, inventChoice, lChoice, preciousItem, checkItem;
+	int i=0,totalItems=0;
+	bool foundItem = false;
+	cout<<"Welcome to SURVIVAL CHOICES\n";
+	sleep(1);
+	cout<<"You will start the game with 3 items. \n";
+	sleep(1);
+	//Add 3 items to the array:
+	pItems[totalItems++] = "Sword";
+	pItems[totalItems++] = "Bow";
+	pItems[totalItems++] = "Arrow";
+	cout<<"As you progress through the game, you will gain more items, each of which shall be named by you.";
+	sleep(1);
+	cout<<"Before the game ends, you have to use atleast one item.";
+	sleep(1);
+	cout<<"As you approach the bridge, you will have to give one of your most treasured items of the 5 that you now have, to the bridge troll!";
+	sleep(1);
+	cout<<"Do you wish to play the game? ('yes' or 'no')\n";
+	sleep(2);
+	cin>>pChoice;
+	if(pChoice == "yes")
+	{
+		cout<<"You have the following items in your inventory:\n";
+		for(i=0;i<totalItems;i++)
+			{
+				if(pItems[i] != "")
+				cout<< "-" <<pItems[i]<<"\n";
+			}
+		cout<<"As you are walking down the lonely path in the forest, you find an item!\n";
+		sleep(1);
+		cout<<"What would you like to name this item?(one word only!)\n";
+		cin>>itemName1;
+		cout<<"You now have "<<itemName1<<"\n";
+		//Add the item entered by user to the array:
+		pItems[totalItems++] = itemName1;
+		cout<<"Do you wish to see your inventory?\n";
+		cin>>inventChoice;
+		if(inventChoice == "yes")
+		{
+			for(i=0;i<totalItems;i++)
+			{
+				if(pItems[i] != "")
+				cout<< "-" <<pItems[i]<<"\n";
+			}
+		}
+		cout<<"Moving On! As you walk further down the road, you encounter a Lion on the path! To proceed, you shall have to kill the lion using your arrow. However, doing so shall remove the arrow from your inventory! Do you wish to use your arrow to kill the lion?\n";
+		sleep(1);
+		cin>>lChoice;
+		if(lChoice == "yes")
+		{
+			cout<<"You have killed the lion and survived!\n";
+			//Remove one item from the array:
+			pItems[2] = "";
+		}
+		else
+		{
+			cout<<"Game Over!";
+			return 0;
+		} 
+		cout<<"Do you wish to see your inventory? \n";
+		cin>>inventChoice;
+		if(inventChoice == "yes")
+		{
+			for(i=0;i<totalItems;i++)
+			{
+				if(pItems[i] != "")
+				cout<< "-" <<pItems[i]<<"\n";
+			}
+		}
+		cout<<"As you move along the path, near the pond you find an item! What would you like to name it?(One word only!)\n";
+		cin>>itemName2;
+		cout<<"You have now acquired: "<<itemName2<<"\n";
+		//Add the item entered by user to the array:
+		pItems[totalItems++] = itemName2;
+		cout<<"Do you wish to see your inventory? \n";
+		cin>>inventChoice;
+		if(inventChoice == "yes")
+		{
+			for(i=0;i<totalItems;i++)
+			{
+				if(pItems[i] != "")
+				cout<< "-" <<pItems[i]<<"\n";
+			}
+		}
+		cout<<"Once again, moving along the path, you find a third and final item! What would you like to name this item?(One word only!)\n";
+		cin>>itemName3;
+		cout<<"You have now acquired: "<<itemName3<<"\n";
+		//Add the item entered by user to the array:
+		pItems[totalItems++] = itemName3;
+		cout<<"Do you wish to see your inventory? \n";
+		cin>>inventChoice;
+		if(inventChoice == "yes")
+		{
+			for(i=0;i<totalItems;i++)
+			{
+				if(pItems[i] != "")
+				cout<< "-" <<pItems[i]<<"\n";
+			}
+		}
+		cout<<"What is your most precious item from the inventory?\n";
+		cin>>preciousItem;
+		//Used a while loop to check that the item entered is in the inventory:
+		while(!foundItem)
+		{
+			for(i=0; i<totalItems;i++)
+			{
+				if(pItems[i] == preciousItem)
+				{
+					foundItem = true;
+					break;
+				}
+				else if(i == totalItems - 1)
+				{
+					cout<<"Item is not in the list! Please try again:\n";
+					cin>>preciousItem;
+				}
+			}
+		}
+		cout<<"Finally after a long journey, you have reached the bridge! The bridge troll is waiting for his fee to let you pass! You have to forsake your most precious item as the fee to pass the bridge! Please enter the item: ";
+		cin>>checkItem;
+		//used a while loop to ensure the player enters the correct item to exit the bridge/game:
+		while(checkItem != preciousItem) 
+		{
+			cout<<"That is not your most precious item!\n";
+			cout<<"Please enter the most precious item to forsake: \n";
+			cin>>checkItem;
+			if(checkItem == preciousItem)
+			{
+				cout<<"You have successfully finished the game! Adios until next time Hooman!\n";
+				break;
+			}
+		}
+		for(i=0; i<totalItems; i++)
+		{
+			if(pItems[i] == checkItem)
+			//Removed another item from the array:
+			pItems[i] = "";
+		}
+		cout<<"Your inventory is at the end of game is: \n";
+		for(i=0;i<totalItems;i++)
+		{
+			if(pItems[i] != "")
+			cout<< "-" <<pItems[i]<<"\n";
+		}
+	}	
+}
